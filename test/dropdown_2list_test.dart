@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dropdown_2list/dropdown_2list.dart';
+import 'package:tp_dropdown_2list/dropdown_2list.dart';
 
 void main() {
   group('Dropdown2List Widget Tests', () {
     testWidgets('should render dropdown with correct properties',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
               labelFirstList: 'Category A',
@@ -19,7 +19,7 @@ void main() {
               hintText: 'Select an option',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 16),
+              textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,
               dropdownIcon: Icons.arrow_drop_down,
@@ -35,7 +35,7 @@ void main() {
     testWidgets('should show hint text when no item is selected',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
               labelFirstList: 'Category A',
@@ -47,7 +47,7 @@ void main() {
               hintText: 'Please select',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 16),
+              textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,
               dropdownIcon: Icons.arrow_drop_down,
@@ -62,7 +62,7 @@ void main() {
     testWidgets('should handle tap to open dropdown',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
               labelFirstList: 'Category A',
@@ -74,7 +74,7 @@ void main() {
               hintText: 'Select an option',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 16),
+              textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,
               dropdownIcon: Icons.arrow_drop_down,
@@ -102,10 +102,10 @@ void main() {
             body: Dropdown2List(
               labelFirstList: 'Category A',
               labelSecondList: 'Category B',
-              idItemsFirstList: ['id1'],
-              idItemsSecondList: ['id2'],
-              itemsFirstList: ['Item 1'],
-              itemsSecondList: ['Item 2'],
+              idItemsFirstList: const ['id1'],
+              idItemsSecondList: const ['id2'],
+              itemsFirstList: const ['Item 1'],
+              itemsSecondList: const ['Item 2'],
               hintText: 'Select an option',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
@@ -133,10 +133,8 @@ void main() {
     });
 
     testWidgets('should handle multi-select mode', (WidgetTester tester) async {
-      List<String> selectedIds = [];
-
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
               labelFirstList: 'Category A',
@@ -148,14 +146,11 @@ void main() {
               hintText: 'Select options',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 16),
+              textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,
               dropdownIcon: Icons.arrow_drop_down,
               isMultiSelect: true,
-              onMultiItemSelected: (ids, texts) {
-                selectedIds = ids;
-              },
             ),
           ),
         ),

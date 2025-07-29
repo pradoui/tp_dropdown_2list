@@ -45,8 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 50,
             labelFirstList: 'Funil Padrão',
             labelSecondList: 'Pós Venda',
-            idItemsFirstList: ['032141351313', '456313874613', '12357643521'],
-            idItemsSecondList: [
+            idItemsFirstList: const [
+              '032141351313',
+              '456313874613',
+              '12357643521'
+            ],
+            idItemsSecondList: const [
               '134341354421',
               '3643513254384',
               '03254385131354',
@@ -54,12 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
               '34431374813',
               '3435416531',
             ],
-            itemsFirstList: [
+            itemsFirstList: const [
               'Interesse Inicial',
               'Interesse de Compra',
               'Vendido',
             ],
-            itemsSecondList: [
+            itemsSecondList: const [
               'Pós Venda',
               'Interesse de Recompra',
               'Pagamento',
@@ -77,13 +81,17 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.black87,
             ),
             dropdownIcon: Icons.arrow_drop_down,
-            isMultiSelect: false, // Habilita seleção múltipla
+            isMultiSelect: false,
             onItemSelected: (String id, String text) {
+              // ignore: avoid_print
               print('ID selecionado: $id');
+              // ignore: avoid_print
               print('Texto selecionado: $text');
             },
             onMultiItemSelected: (List<String> ids, List<String> texts) {
+              // ignore: avoid_print
               print('IDs selecionados: $ids');
+              // ignore: avoid_print
               print('Textos selecionados: $texts');
             },
           ),

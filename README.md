@@ -18,7 +18,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  dropdown_2list: ^1.0.0
+  tp_dropdown_2list: ^1.0.0
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ dependencies:
 ### Basic Single Selection
 
 ```dart
-import 'package:dropdown_2list/dropdown_2list.dart';
+import 'package:tp_dropdown_2list/dropdown_2list.dart';
 
 Dropdown2List(
   labelFirstList: 'Category A',

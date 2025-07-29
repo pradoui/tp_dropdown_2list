@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dropdown_2list/dropdown_2list.dart';
+import 'package:tp_dropdown_2list/dropdown_2list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -58,8 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 50,
               labelFirstList: 'Funil Padrão',
               labelSecondList: 'Pós Venda',
-              idItemsFirstList: ['032141351313', '456313874613', '12357643521'],
-              idItemsSecondList: [
+              idItemsFirstList: const [
+                '032141351313',
+                '456313874613',
+                '12357643521'
+              ],
+              idItemsSecondList: const [
                 '134341354421',
                 '3643513254384',
                 '03254385131354',
@@ -67,12 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 '34431374813',
                 '3435416531',
               ],
-              itemsFirstList: [
+              itemsFirstList: const [
                 'Interesse Inicial',
                 'Interesse de Compra',
                 'Vendido',
               ],
-              itemsSecondList: [
+              itemsSecondList: const [
                 'Pós Venda',
                 'Interesse de Recompra',
                 'Pagamento',
@@ -94,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   selectedId = id;
                   selectedText = text;
                 });
+                // ignore: avoid_print
                 print('Single Selection - ID: $id, Text: $text');
               },
             ),
@@ -111,14 +116,14 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 50,
               labelFirstList: 'Categorias',
               labelSecondList: 'Subcategorias',
-              idItemsFirstList: ['cat1', 'cat2', 'cat3'],
-              idItemsSecondList: ['sub1', 'sub2', 'sub3', 'sub4'],
-              itemsFirstList: [
+              idItemsFirstList: const ['cat1', 'cat2', 'cat3'],
+              idItemsSecondList: const ['sub1', 'sub2', 'sub3', 'sub4'],
+              itemsFirstList: const [
                 'Eletrônicos',
                 'Roupas',
                 'Livros',
               ],
-              itemsSecondList: [
+              itemsSecondList: const [
                 'Smartphones',
                 'Notebooks',
                 'Camisetas',
@@ -139,18 +144,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   selectedIds = ids;
                   selectedTexts = texts;
                 });
+                // ignore: avoid_print
                 print('Multi Selection - IDs: $ids, Texts: $texts');
               },
             ),
             const SizedBox(height: 20),
             if (selectedIds.isNotEmpty)
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Selected Items:'),
-                  ...selectedTexts.map((text) => Text('• $text')),
                 ],
               ),
+            if (selectedIds.isNotEmpty)
+              ...selectedTexts.map((text) => Text('• $text')),
           ],
         ),
       ),

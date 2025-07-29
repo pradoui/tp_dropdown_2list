@@ -1,5 +1,5 @@
-name: dropdown_2list_example
-description: Example app for dropdown_2list package
+name: tp_dropdown_2list_example
+description: Example app for tp_dropdown_2list package
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dropdown_2list:
+  tp_dropdown_2list:
     path: ../
 
 dev_dependencies:
