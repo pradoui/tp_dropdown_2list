@@ -177,6 +177,12 @@ class _Dropdown2ListState extends State<Dropdown2List>
     final Offset offset = renderBox.localToGlobal(Offset.zero);
     final Size size = renderBox.size;
 
+    // Calcular se há espaço suficiente abaixo
+    final screenHeight = MediaQuery.of(context).size.height;
+    final spaceBelow = screenHeight - offset.dy - size.height;
+    final dropdownHeight = 250.0; // Altura máxima do dropdown
+    final shouldOpenUp = spaceBelow < dropdownHeight + 20; // 20px de margem
+
     _controller.value = 0;
     _hoveredIndexNotifier.value = null;
 
@@ -188,7 +194,9 @@ class _Dropdown2ListState extends State<Dropdown2List>
           children: [
             Positioned(
               left: offset.dx,
-              top: offset.dy + size.height + 8,
+              top: shouldOpenUp
+                  ? offset.dy - dropdownHeight - 8
+                  : offset.dy + size.height + 8,
               width: widget.width,
               child: Material(
                 elevation: 4,
@@ -203,8 +211,7 @@ class _Dropdown2ListState extends State<Dropdown2List>
                   ),
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount:
-                        2 +
+                    itemCount: 2 +
                         widget.itemsFirstList.length +
                         widget.itemsSecondList.length,
                     itemBuilder: (context, index) {
@@ -261,7 +268,10 @@ class _Dropdown2ListState extends State<Dropdown2List>
                                                       _selectItem(id, text),
                                                 )
                                               : null,
-                                          title: Text(text),
+                                          title: Text(
+                                            text,
+                                            style: widget.textStyle,
+                                          ),
                                           onTap: () => _selectItem(id, text),
                                         ),
                                       ),
@@ -327,7 +337,10 @@ class _Dropdown2ListState extends State<Dropdown2List>
                                                     _selectItem(id, text),
                                               )
                                             : null,
-                                        title: Text(text),
+                                        title: Text(
+                                          text,
+                                          style: widget.textStyle,
+                                        ),
                                         onTap: () => _selectItem(id, text),
                                       ),
                                     ),
