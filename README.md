@@ -81,6 +81,7 @@ Dropdown2List(
 | `border` | BoxBorder? | No | Custom border styling |
 | `borderRadius` | BorderRadius? | No | Border radius for the container |
 | `dropdownIcon` | IconData | No | Custom dropdown arrow icon |
+| `hoverColor` | Color? | No | Custom color for item hover effect |
 
 ## Callbacks
 
@@ -159,6 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             width: 300,
             height: 50,
+            hoverColor: Colors.blue.shade100,
             onItemSelected: (id, text) {
               print('Selected: $id - $text');
             },

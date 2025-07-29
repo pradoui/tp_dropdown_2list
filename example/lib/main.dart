@@ -93,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.black87,
               ),
               dropdownIcon: Icons.arrow_drop_down,
+              hoverColor: Colors.blue.shade100,
               onItemSelected: (id, text) {
                 setState(() {
                   selectedId = id;
@@ -138,6 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.black87,
               ),
               dropdownIcon: Icons.arrow_drop_down,
+              hoverColor: Colors.green.shade100,
               isMultiSelect: true,
               onMultiItemSelected: (ids, texts) {
                 setState(() {

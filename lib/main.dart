@@ -81,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.black87,
             ),
             dropdownIcon: Icons.arrow_drop_down,
+            hoverColor: Colors.blue.shade100,
             isMultiSelect: false,
             onItemSelected: (String id, String text) {
               // ignore: avoid_print

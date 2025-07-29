@@ -20,6 +20,7 @@ class Dropdown2List extends StatefulWidget {
   final Function(String id, String text)? onItemSelected;
   final Function(List<String> ids, List<String> texts)? onMultiItemSelected;
   final bool isMultiSelect;
+  final Color? hoverColor;
 
   const Dropdown2List({
     super.key,
@@ -42,6 +43,7 @@ class Dropdown2List extends StatefulWidget {
     this.onItemSelected,
     this.onMultiItemSelected,
     this.isMultiSelect = false,
+    this.hoverColor,
   });
 
   @override
@@ -179,9 +181,12 @@ class _Dropdown2ListState extends State<Dropdown2List>
 
     // Calcular se há espaço suficiente abaixo
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     final spaceBelow = screenHeight - offset.dy - size.height;
+    final spaceRight = screenWidth - offset.dx;
     final dropdownHeight = 250.0; // Altura máxima do dropdown
     final shouldOpenUp = spaceBelow < dropdownHeight + 20; // 20px de margem
+    final shouldOpenLeft = spaceRight < widget.width + 20; // 20px de margem
 
     _controller.value = 0;
     _hoveredIndexNotifier.value = null;
@@ -193,7 +198,9 @@ class _Dropdown2ListState extends State<Dropdown2List>
         child: Stack(
           children: [
             Positioned(
-              left: offset.dx,
+              left: shouldOpenLeft
+                  ? offset.dx + size.width - widget.width
+                  : offset.dx,
               top: shouldOpenUp
                   ? offset.dy - dropdownHeight - 8
                   : offset.dy + size.height + 8,
@@ -250,7 +257,8 @@ class _Dropdown2ListState extends State<Dropdown2List>
                                     return Container(
                                       decoration: BoxDecoration(
                                         color: isItemHovered
-                                            ? Colors.blue.shade50
+                                            ? (widget.hoverColor ??
+                                                Colors.blue.shade50)
                                             : Colors.transparent,
                                       ),
                                       child: MouseRegion(
@@ -319,7 +327,8 @@ class _Dropdown2ListState extends State<Dropdown2List>
                                   return Container(
                                     decoration: BoxDecoration(
                                       color: isItemHovered
-                                          ? Colors.blue.shade50
+                                          ? (widget.hoverColor ??
+                                              Colors.blue.shade50)
                                           : Colors.transparent,
                                     ),
                                     child: MouseRegion(
