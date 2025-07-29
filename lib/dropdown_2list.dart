@@ -183,8 +183,7 @@ class _Dropdown2ListState extends State<Dropdown2List>
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final spaceBelow = screenHeight - offset.dy - size.height;
-    final spaceRight = screenWidth - offset.dx;
-    final dropdownHeight = 250.0; // Altura máxima do dropdown
+    const dropdownHeight = 250.0; // Altura máxima do dropdown
     final shouldOpenUp = spaceBelow < dropdownHeight + 20; // 20px de margem
 
     // Calcular posição horizontal ideal
