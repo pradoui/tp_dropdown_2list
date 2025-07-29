@@ -186,7 +186,17 @@ class _Dropdown2ListState extends State<Dropdown2List>
     final spaceRight = screenWidth - offset.dx;
     final dropdownHeight = 250.0; // Altura máxima do dropdown
     final shouldOpenUp = spaceBelow < dropdownHeight + 20; // 20px de margem
-    final shouldOpenLeft = spaceRight < widget.width + 20; // 20px de margem
+
+    // Calcular posição horizontal ideal
+    double leftPosition = offset.dx;
+    if (offset.dx + widget.width > screenWidth - 20) {
+      // Se o dropdown vai estourar à direita, ajustar para a esquerda
+      leftPosition = screenWidth - widget.width - 20;
+    }
+    if (leftPosition < 20) {
+      // Se ainda estiver muito à esquerda, limitar a 20px da borda
+      leftPosition = 20;
+    }
 
     _controller.value = 0;
     _hoveredIndexNotifier.value = null;
@@ -198,9 +208,7 @@ class _Dropdown2ListState extends State<Dropdown2List>
         child: Stack(
           children: [
             Positioned(
-              left: shouldOpenLeft
-                  ? offset.dx + size.width - widget.width
-                  : offset.dx,
+              left: leftPosition,
               top: shouldOpenUp
                   ? offset.dy - dropdownHeight - 8
                   : offset.dy + size.height + 8,
