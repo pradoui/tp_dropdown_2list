@@ -1,16 +1,21 @@
+
+
 # Dropdown2List
 
-A customizable dropdown widget for Flutter that supports dual-category item selection with both single and multi-select capabilities.
+A customizable dropdown widget for Flutter that now supports multiple content lists, allowing users to pass as many lists as they want, with single or multi-select options.
 
-## Features
 
-- **Dual Category Support**: Display items from two separate categories with custom labels
-- **Flexible Selection Modes**: Toggle between single selection and multi-select with checkboxes
-- **Smooth Animations**: Elegant fade-in/fade-out and scale animations for opening/closing
-- **Interactive Hover Effects**: Visual feedback when hovering over items
-- **Customizable Styling**: Fully customizable colors, borders, text styles, and dimensions
-- **ID-Text Mapping**: Each displayed item maps to an internal ID for data management
-- **Responsive Design**: Adapts to different screen sizes with overflow handling
+
+## Main Features
+
+- **Multiple List Support**: Pass as many lists as you want, each with its own label, IDs, and texts
+- **Single or Multi-Select**: Switch between single selection or multi-select with checkboxes
+- **Smooth Animations**: Fade-in/fade-out and scale when opening/closing
+- **Hover Effect**: Visual feedback when hovering over items
+- **Full Customization**: Colors, borders, text styles, and dimensions
+- **ID-Text Mapping**: Each item displays text and has an internal ID
+- **Responsive Design**: Adapts to different screen sizes
+
 
 ## Installation
 
@@ -23,19 +28,26 @@ dependencies:
 
 ## Usage
 
-### Basic Single Selection
+
+
+### Example usage with multiple lists
 
 ```dart
 import 'package:tp_dropdown_2list/dropdown_2list.dart';
 
 Dropdown2List(
-  labelFirstList: 'Category A',
-  labelSecondList: 'Category B',
-  idItemsFirstList: ['id1', 'id2', 'id3'],
-  idItemsSecondList: ['id4', 'id5', 'id6'],
-  itemsFirstList: ['Item 1', 'Item 2', 'Item 3'],
-  itemsSecondList: ['Item 4', 'Item 5', 'Item 6'],
-  hintText: 'Select an option',
+  labels: const ['Main Funnel', 'After Sales', 'Finance'],
+  idItemsLists: const [
+    ['032141351313', '456313874613', '12357643521'],
+    ['134341354421', '3643513254384'],
+    ['id_fin_1', 'id_fin_2'],
+  ],
+  itemsLists: const [
+    ['Initial Interest', 'Purchase Interest', 'Sold'],
+    ['After Sales', 'Repurchase Interest'],
+    ['Invoice', 'Charge'],
+  ],
+  hintText: 'Select a stage',
   backgroundColor: Colors.blue.shade50,
   dropdownBackgroundColor: Colors.white,
   textStyle: const TextStyle(
@@ -45,14 +57,26 @@ Dropdown2List(
   ),
   width: 300,
   height: 50,
+  labelColor: Colors.lightBlueAccent,
   onItemSelected: (id, text) => print('Selected: $id - $text'),
 )
 ```
 
-### Multi-Select Mode
+
+### Multi-select mode
 
 ```dart
 Dropdown2List(
+  labels: const ['Funnel', 'Finance'],
+  idItemsLists: const [
+    ['id1', 'id2'],
+    ['id3'],
+  ],
+  itemsLists: const [
+    ['Item 1', 'Item 2'],
+    ['Item 3'],
+  ],
+  labelColor: Colors.lightBlueAccent,
   isMultiSelect: true,
   onMultiItemSelected: (ids, texts) => print('Selected IDs: $ids'),
   // ... other parameters
@@ -61,27 +85,28 @@ Dropdown2List(
 
 ## Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `labelFirstList` | String | Yes | Label for the first category |
-| `labelSecondList` | String | Yes | Label for the second category |
-| `idItemsFirstList` | List<String> | Yes | IDs for first category items |
-| `idItemsSecondList` | List<String> | Yes | IDs for second category items |
-| `itemsFirstList` | List<String> | Yes | Display text for first category |
-| `itemsSecondList` | List<String> | Yes | Display text for second category |
-| `hintText` | String | Yes | Placeholder text when nothing is selected |
-| `backgroundColor` | Color | Yes | Background color of the main container |
-| `dropdownBackgroundColor` | Color | Yes | Background color of the dropdown menu |
-| `textStyle` | TextStyle | Yes | Text styling for the selected value |
-| `width` | double | Yes | Width of the dropdown |
-| `height` | double | Yes | Height of the dropdown |
-| `isMultiSelect` | bool | No | Enable multi-select mode (default: false) |
-| `onItemSelected` | Function(String, String)? | No | Callback for single selection |
-| `onMultiItemSelected` | Function(List<String>, List<String>)? | No | Callback for multi-selection |
-| `border` | BoxBorder? | No | Custom border styling |
-| `borderRadius` | BorderRadius? | No | Border radius for the container |
-| `dropdownIcon` | IconData | No | Custom dropdown arrow icon |
-| `hoverColor` | Color? | No | Custom color for item hover effect |
+
+
+| Parameter               | Type                              | Required    | Description |
+|-------------------------|-----------------------------------|-------------|-------------|
+| `labels`                | List<String>                      | Yes         | List of labels for each item group |
+| `idItemsLists`          | List<List<String>>                | Yes         | List of ID lists for each group |
+| `itemsLists`            | List<List<String>>                | Yes         | List of text lists for each group |
+| `hintText`              | String                            | Yes         | Placeholder text when nothing is selected |
+| `backgroundColor`       | Color                             | Yes         | Background color of the main container |
+| `dropdownBackgroundColor`| Color                            | Yes         | Background color of the dropdown menu |
+| `textStyle`             | TextStyle                         | Yes         | Text style for the selected value |
+| `width`                 | double                            | Yes         | Dropdown width |
+| `height`                | double                            | Yes         | Dropdown height |
+| `labelColor`            | Color                             | Yes         | Color of the group label text |
+| `isMultiSelect`         | bool                              | No          | Enables multi-select mode (default: false) |
+| `onItemSelected`        | Function(String, String)?         | No          | Callback for single selection |
+| `onMultiItemSelected`   | Function(List<String>, List<String>)? | No     | Callback for multi-selection |
+| `border`                | BoxBorder?                        | No          | Custom border styling |
+| `borderRadius`          | BorderRadius?                     | No          | Border radius for the container |
+| `dropdownIcon`          | IconData                          | No          | Custom dropdown arrow icon |
+| `hoverColor`            | Color?                            | No          | Custom color for item hover effect |
+
 
 ## Callbacks
 
@@ -101,20 +126,23 @@ onMultiItemSelected: (List<String> ids, List<String> texts) {
 }
 ```
 
+
+
 ## Visual Structure
 
-The dropdown displays items in the following order:
-1. **First Category Label** (e.g., "Category A")
-2. **First Category Items** (with optional checkboxes in multi-select mode)
-3. **Second Category Label** (e.g., "Category B")
-4. **Second Category Items** (with optional checkboxes in multi-select mode)
+The dropdown displays item groups in the order of the provided lists:
+1. **Group label** (e.g., "Main Funnel")
+2. **Group items** (with checkbox if multi-select)
+3. ... (repeats for each group)
 
-## Example
+
+
+## Full Example
 
 ```dart
 class MyHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -126,31 +154,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Dropdown2List(
-            labelFirstList: 'Funil Padrão',
-            labelSecondList: 'Pós Venda',
-            idItemsFirstList: ['032141351313', '456313874613', '12357643521'],
-            idItemsSecondList: [
-              '134341354421',
-              '3643513254384',
-              '03254385131354',
-              '20245315135',
-              '34431374813',
-              '3435416531',
+            labels: const ['Main Funnel', 'After Sales'],
+            idItemsLists: const [
+              ['032141351313', '456313874613', '12357643521'],
+              ['134341354421', '3643513254384', '03254385131354', '20245315135', '34431374813', '3435416531'],
             ],
-            itemsFirstList: [
-              'Interesse Inicial',
-              'Interesse de Compra',
-              'Vendido',
+            itemsLists: const [
+              ['Initial Interest', 'Purchase Interest', 'Sold'],
+              ['After Sales', 'Repurchase Interest', 'Payment', 'Awaiting Shipment', 'Payment', 'No Interest'],
             ],
-            itemsSecondList: [
-              'Pós Venda',
-              'Interesse de Recompra',
-              'Pagamento',
-              'Aguardando Envio',
-              'Pagamento',
-              'Sem Interesse',
-            ],
-            hintText: 'Selecione uma etapa do funil',
+            hintText: 'Select a stage',
             backgroundColor: Colors.blue.shade50,
             dropdownBackgroundColor: Colors.white,
             textStyle: const TextStyle(
@@ -160,6 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             width: 300,
             height: 50,
+            labelColor: Colors.lightBlueAccent,
             hoverColor: Colors.blue.shade100,
             onItemSelected: (id, text) {
               print('Selected: $id - $text');
@@ -171,6 +185,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+```
+
 
 ## Dependencies
 

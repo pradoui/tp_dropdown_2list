@@ -10,15 +10,19 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
-              labelFirstList: 'Category A',
-              labelSecondList: 'Category B',
-              idItemsFirstList: ['id1', 'id2'],
-              idItemsSecondList: ['id3', 'id4'],
-              itemsFirstList: ['Item 1', 'Item 2'],
-              itemsSecondList: ['Item 3', 'Item 4'],
+              labels: const ['Category A', 'Category B'],
+              idItemsLists: const [
+                ['id1', 'id2'],
+                ['id3', 'id4'],
+              ],
+              itemsLists: const [
+                ['Item 1', 'Item 2'],
+                ['Item 3', 'Item 4'],
+              ],
               hintText: 'Select an option',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
+              labelColor: Colors.lightBlueAccent,
               textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,
@@ -38,15 +42,19 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
-              labelFirstList: 'Category A',
-              labelSecondList: 'Category B',
-              idItemsFirstList: ['id1'],
-              idItemsSecondList: ['id2'],
-              itemsFirstList: ['Item 1'],
-              itemsSecondList: ['Item 2'],
+              labels: const ['Category A', 'Category B'],
+              idItemsLists: const [
+                ['id1'],
+                ['id2'],
+              ],
+              itemsLists: const [
+                ['Item 1'],
+                ['Item 2'],
+              ],
               hintText: 'Please select',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
+              labelColor: Colors.lightBlueAccent,
               textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,
@@ -65,15 +73,19 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
-              labelFirstList: 'Category A',
-              labelSecondList: 'Category B',
-              idItemsFirstList: ['id1'],
-              idItemsSecondList: ['id2'],
-              itemsFirstList: ['Item 1'],
-              itemsSecondList: ['Item 2'],
+              labels: const ['Category A', 'Category B'],
+              idItemsLists: const [
+                ['id1'],
+                ['id2'],
+              ],
+              itemsLists: const [
+                ['Item 1'],
+                ['Item 2'],
+              ],
               hintText: 'Select an option',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
+              labelColor: Colors.lightBlueAccent,
               textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,
@@ -100,15 +112,19 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
-              labelFirstList: 'Category A',
-              labelSecondList: 'Category B',
-              idItemsFirstList: const ['id1'],
-              idItemsSecondList: const ['id2'],
-              itemsFirstList: const ['Item 1'],
-              itemsSecondList: const ['Item 2'],
+              labels: const ['Category A', 'Category B'],
+              idItemsLists: const [
+                ['id1'],
+                ['id2'],
+              ],
+              itemsLists: const [
+                ['Item 1'],
+                ['Item 2'],
+              ],
               hintText: 'Select an option',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
+              labelColor: Colors.lightBlueAccent,
               textStyle: const TextStyle(fontSize: 16),
               width: 300,
               height: 50,
@@ -137,15 +153,19 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: Dropdown2List(
-              labelFirstList: 'Category A',
-              labelSecondList: 'Category B',
-              idItemsFirstList: ['id1', 'id2'],
-              idItemsSecondList: ['id3'],
-              itemsFirstList: ['Item 1', 'Item 2'],
-              itemsSecondList: ['Item 3'],
+              labels: const ['Category A', 'Category B'],
+              idItemsLists: const [
+                ['id1', 'id2'],
+                ['id3'],
+              ],
+              itemsLists: const [
+                ['Item 1', 'Item 2'],
+                ['Item 3'],
+              ],
               hintText: 'Select options',
               backgroundColor: Colors.blue,
               dropdownBackgroundColor: Colors.white,
+              labelColor: Colors.lightBlueAccent,
               textStyle: TextStyle(fontSize: 16),
               width: 300,
               height: 50,

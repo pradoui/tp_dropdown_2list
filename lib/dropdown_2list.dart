@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Dropdown2List extends StatefulWidget {
-  final String labelFirstList;
-  final String labelSecondList;
-  final List<String> idItemsFirstList;
-  final List<String> idItemsSecondList;
-  final List<String> itemsFirstList;
-  final List<String> itemsSecondList;
+  final List<String> labels;
+  final List<List<String>> idItemsLists;
+  final List<List<String>> itemsLists;
   final String? initialValue;
   final String hintText;
   final Color backgroundColor;
   final Color dropdownBackgroundColor;
   final TextStyle textStyle;
+  final Color labelColor;
   final IconData dropdownIcon;
   final double width;
   final double height;
@@ -24,15 +22,13 @@ class Dropdown2List extends StatefulWidget {
 
   const Dropdown2List({
     super.key,
-    required this.labelFirstList,
-    required this.labelSecondList,
-    required this.idItemsFirstList,
-    required this.idItemsSecondList,
-    required this.itemsFirstList,
-    required this.itemsSecondList,
+    required this.labels,
+    required this.idItemsLists,
+    required this.itemsLists,
     required this.backgroundColor,
     required this.dropdownBackgroundColor,
     required this.textStyle,
+    required this.labelColor,
     required this.dropdownIcon,
     this.initialValue,
     required this.hintText,
@@ -225,148 +221,93 @@ class _Dropdown2ListState extends State<Dropdown2List>
                   ),
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: 2 +
-                        widget.itemsFirstList.length +
-                        widget.itemsSecondList.length,
+                    itemCount: widget.labels.length +
+                        widget.itemsLists
+                            .fold(0, (prev, list) => prev + list.length),
                     itemBuilder: (context, index) {
-                      // Primeiro label
-                      if (index == 0) {
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                          child: Text(
-                            widget.labelFirstList,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        );
-                      }
-
-                      // Itens da primeira lista
-                      if (index <= widget.itemsFirstList.length) {
-                        final itemIndex = index - 1;
-                        final id = widget.idItemsFirstList[itemIndex];
-                        final text = widget.itemsFirstList[itemIndex];
-                        return AnimatedBuilder(
-                          animation: _controller,
-                          builder: (context, child) {
-                            return Opacity(
-                              opacity: _opacityAnim.value,
-                              child: Transform.scale(
-                                scale: _scaleAnim.value,
-                                child: ValueListenableBuilder<int?>(
-                                  valueListenable: _hoveredIndexNotifier,
-                                  builder: (context, hoveredIndex, child) {
-                                    final bool isItemHovered =
-                                        hoveredIndex == index;
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: isItemHovered
-                                            ? (widget.hoverColor ??
-                                                Colors.blue.shade50)
-                                            : Colors.transparent,
-                                      ),
-                                      child: MouseRegion(
-                                        onEnter: (_) {
-                                          _hoveredIndexNotifier.value = index;
-                                        },
-                                        onExit: (_) {
-                                          _hoveredIndexNotifier.value = null;
-                                        },
-                                        child: ListTile(
-                                          leading: widget.isMultiSelect
-                                              ? Checkbox(
-                                                  value: _isItemSelected(id),
-                                                  onChanged: (_) =>
-                                                      _selectItem(id, text),
-                                                )
-                                              : null,
-                                          title: Text(
-                                            text,
-                                            style: widget.textStyle,
-                                          ),
-                                          onTap: () => _selectItem(id, text),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }
-
-                      // Label da segunda lista
-                      if (index == widget.itemsFirstList.length + 1) {
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                          child: Text(
-                            widget.labelSecondList,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        );
-                      }
-
-                      // Itens da segunda lista
-                      final secondItemIndex =
-                          index - (widget.itemsFirstList.length + 2);
-                      final id = widget.idItemsSecondList[secondItemIndex];
-                      final text = widget.itemsSecondList[secondItemIndex];
-                      return AnimatedBuilder(
-                        animation: _controller,
-                        builder: (context, child) {
-                          return Opacity(
-                            opacity: _opacityAnim.value,
-                            child: Transform.scale(
-                              scale: _scaleAnim.value,
-                              child: ValueListenableBuilder<int?>(
-                                valueListenable: _hoveredIndexNotifier,
-                                builder: (context, hoveredIndex, child) {
-                                  final bool isItemHovered =
-                                      hoveredIndex == index;
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      color: isItemHovered
-                                          ? (widget.hoverColor ??
-                                              Colors.blue.shade50)
-                                          : Colors.transparent,
-                                    ),
-                                    child: MouseRegion(
-                                      onEnter: (_) {
-                                        _hoveredIndexNotifier.value = index;
-                                      },
-                                      onExit: (_) {
-                                        _hoveredIndexNotifier.value = null;
-                                      },
-                                      child: ListTile(
-                                        leading: widget.isMultiSelect
-                                            ? Checkbox(
-                                                value: _isItemSelected(id),
-                                                onChanged: (_) =>
-                                                    _selectItem(id, text),
-                                              )
-                                            : null,
-                                        title: Text(
-                                          text,
-                                          style: widget.textStyle,
-                                        ),
-                                        onTap: () => _selectItem(id, text),
-                                      ),
-                                    ),
-                                  );
-                                },
+                      int runningIndex = 0;
+                      for (int listIdx = 0;
+                          listIdx < widget.labels.length;
+                          listIdx++) {
+                        // Label
+                        if (index == runningIndex) {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                            child: Text(
+                              widget.labels[listIdx],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: widget.labelColor,
                               ),
                             ),
                           );
-                        },
-                      );
+                        }
+                        runningIndex++;
+                        // Itens
+                        for (int itemIdx = 0;
+                            itemIdx < widget.itemsLists[listIdx].length;
+                            itemIdx++) {
+                          if (index == runningIndex) {
+                            final id = widget.idItemsLists[listIdx][itemIdx];
+                            final text = widget.itemsLists[listIdx][itemIdx];
+                            return AnimatedBuilder(
+                              animation: _controller,
+                              builder: (context, child) {
+                                return Opacity(
+                                  opacity: _opacityAnim.value,
+                                  child: Transform.scale(
+                                    scale: _scaleAnim.value,
+                                    child: ValueListenableBuilder<int?>(
+                                      valueListenable: _hoveredIndexNotifier,
+                                      builder: (context, hoveredIndex, child) {
+                                        final bool isItemHovered =
+                                            hoveredIndex == index;
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            color: isItemHovered
+                                                ? (widget.hoverColor ??
+                                                    Colors.blue.shade50)
+                                                : Colors.transparent,
+                                          ),
+                                          child: MouseRegion(
+                                            onEnter: (_) {
+                                              _hoveredIndexNotifier.value =
+                                                  index;
+                                            },
+                                            onExit: (_) {
+                                              _hoveredIndexNotifier.value =
+                                                  null;
+                                            },
+                                            child: ListTile(
+                                              leading: widget.isMultiSelect
+                                                  ? Checkbox(
+                                                      value:
+                                                          _isItemSelected(id),
+                                                      onChanged: (_) =>
+                                                          _selectItem(id, text),
+                                                    )
+                                                  : null,
+                                              title: Text(
+                                                text,
+                                                style: widget.textStyle,
+                                              ),
+                                              onTap: () =>
+                                                  _selectItem(id, text),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                          runningIndex++;
+                        }
+                      }
+                      return const SizedBox.shrink();
                     },
                   ),
                 ),

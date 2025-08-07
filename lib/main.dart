@@ -43,38 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Dropdown2List(
             width: 300,
             height: 50,
-            labelFirstList: 'Funil Padrão',
-            labelSecondList: 'Pós Venda',
-            idItemsFirstList: const [
-              '032141351313',
-              '456313874613',
-              '12357643521'
+            labels: const ['Funil Padrão', 'Pós Venda', 'Funil secundário'],
+            idItemsLists: const [
+              ['032141351313', '456313874613', '12357643521'],
+              [
+                '134341354421',
+                '3643513254384',
+                '03254385131354',
+                '20245315135',
+                '34431374813',
+                '3435416531'
+              ],
+              ['032141351313', '456313874613', '12357643521'],
             ],
-            idItemsSecondList: const [
-              '134341354421',
-              '3643513254384',
-              '03254385131354',
-              '20245315135',
-              '34431374813',
-              '3435416531',
-            ],
-            itemsFirstList: const [
-              'Interesse Inicial',
-              'Interesse de Compra',
-              'Vendido',
-            ],
-            itemsSecondList: const [
-              'Pós Venda',
-              'Interesse de Recompra',
-              'Pagamento',
-              'Aguardando Envio',
-              'Pagamento',
-              'Sem Interesse',
+            itemsLists: const [
+              ['Interesse Inicial', 'Interesse de Compra', 'Vendido'],
+              [
+                'Pós Venda',
+                'Interesse de Recompra',
+                'Pagamento',
+                'Aguardando Envio',
+                'Pagamento',
+                'Sem Interesse'
+              ],
+              ['FIRST', 'SECOND', 'THIRD'],
             ],
             initialValue: '',
             hintText: 'Selecione uma etapa do funil',
             backgroundColor: Colors.blue.shade50,
             dropdownBackgroundColor: Colors.white,
+            labelColor: Colors.lightBlueAccent,
             textStyle: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -84,15 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
             hoverColor: Colors.blue.shade100,
             isMultiSelect: false,
             onItemSelected: (String id, String text) {
-              // ignore: avoid_print
               print('ID selecionado: $id');
-              // ignore: avoid_print
               print('Texto selecionado: $text');
             },
             onMultiItemSelected: (List<String> ids, List<String> texts) {
-              // ignore: avoid_print
               print('IDs selecionados: $ids');
-              // ignore: avoid_print
               print('Textos selecionados: $texts');
             },
           ),
