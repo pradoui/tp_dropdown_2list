@@ -1,6 +1,6 @@
 name: tp_dropdown_2list
 description: A customizable dropdown widget for Flutter that supports dual-category item selection with both single and multi-select capabilities.
-version: 1.0.3
+version: 1.1.0
 homepage: https://github.com/pradoui/tp_dropdown_2list
 repository: https://github.com/pradoui/tp_dropdown_2list
 issue_tracker: https://github.com/pradoui/tp_dropdown_2list/issues

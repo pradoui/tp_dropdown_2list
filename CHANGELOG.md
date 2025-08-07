@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.1.0] - 2025-08-07
+
+### Changed
+- Widget now supports any number of item lists (dynamic groups)
+- API refactored: replaced fixed parameters with dynamic lists (`labels`, `idItemsLists`, `itemsLists`)
+- Added `labelColor` parameter for customizing group label color
+- Documentation fully translated to English and updated for new API
+
+### Fixed
+- Improved documentation and global accessibility
+
 ## [1.0.3] - 2024-01-XX
 
 ### Fixed

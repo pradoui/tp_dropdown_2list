@@ -23,7 +23,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  tp_dropdown_2list: ^1.0.3
+  tp_dropdown_2list: ^1.1.0
 ```
 
 ## Usage
